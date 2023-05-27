@@ -11,7 +11,7 @@ public class AnimatedSpriteRenderer : MonoBehaviour
     public Sprite[] animationSprites;
 
     public float animationTime = 0.25f;
-    public int animationFrame;
+    private int animationFrame;
 
     public bool loop = true;
     public bool idle = true;

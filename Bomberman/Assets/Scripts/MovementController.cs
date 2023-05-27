@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     //Clase que se encarga de mover el objeto
-    public Rigidbody2D rigidbody { get; private set; }
+    private new Rigidbody2D rigidbody;
     private Vector2 direction = Vector2.down;
     public float speed = 5f;
     
@@ -19,6 +19,7 @@ public class MovementController : MonoBehaviour
     public AnimatedSpriteRenderer spriteRendererDown;
     public AnimatedSpriteRenderer spriteRendererLeft;
     public AnimatedSpriteRenderer spriteRendererRight;
+    public AnimatedSpriteRenderer spriteRendererDeath;
     private AnimatedSpriteRenderer activeSpriteRenderer;
 
     private void Awake()
@@ -75,6 +76,38 @@ public class MovementController : MonoBehaviour
 
         activeSpriteRenderer = spriteRenderer;
         activeSpriteRenderer.idle = direction == Vector2.zero;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //si el objeto colisiona con un objeto que tenga el tag "Explosion"
+        if (other.gameObject.layer == LayerMask.NameToLayer("Explosion"))
+        {
+            DeathSequence();
+        }
+    }
+
+    private void DeathSequence()
+    {
+        //metodo que se encarga de la secuencia de muerte del objeto
+        enabled = false;
+        GetComponent<BombController>().enabled = false;
+
+        spriteRendererUp.enabled = false;
+        spriteRendererDown.enabled = false;
+        spriteRendererLeft.enabled = false;
+        spriteRendererRight.enabled = false;
+        spriteRendererDeath.enabled = true;
+
+        Invoke(nameof(OnDeathSequenceEnded), 1.25f);
+
+    }
+
+    private void OnDeathSequenceEnded()
+    {
+        //metodo que se encarga de la secuencia de muerte del objeto
+        gameObject.SetActive(false);
+        FindObjectOfType<GameManager>().CheckWinState();
     }
 
 }
