@@ -60,8 +60,8 @@ public class MovementController : MonoBehaviour
         //Muevo el objeto en la direccion que se le indico
         Vector2 position = rigidbody.position;
         Vector2 traslation = direction * speed * Time.fixedDeltaTime;
-
         rigidbody.MovePosition(position + traslation);
+        
     }
 
     //metodo que se encarga de cambiar la direccion del objeto

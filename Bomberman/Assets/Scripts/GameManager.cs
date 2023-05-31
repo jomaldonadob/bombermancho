@@ -5,7 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public float speed = 0.5f;
     public GameObject[] players;
+    public GameObject[] Scene;
+    public void Start()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+    }
+    public void Update(){
+
+        //get all objects with tag "Scene"
+        Scene = GameObject.FindGameObjectsWithTag("Scene");
+        foreach (GameObject Element in Scene)
+        {
+            Element.transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed;
+        }
+
+
+    }
 
     public void CheckWinState()
     {
