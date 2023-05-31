@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float speed = 0.5f;
+    public float speed = 0.2f;
     public GameObject[] players;
     public GameObject[] Scene;
     public void Start()

@@ -22,16 +22,28 @@ public class WalkerGenerator : MonoBehaviour
         public Tile Walkable;
         public Tile WalkableShadow;
         public bool haveIndestructible = false; 
+        //declare camera
+        public Camera cam;
+        //declare screen width
+
     // Start is called before the first frame update
-    void Start()
-    {
-    for (int j = 0; j < 20; j++)
+    void Update()
+    {       
+        BoundsInt bounds = tileMapUndestroyable.cellBounds;
+        Vector3Int cellPosition = bounds.position;
+        cellPosition.x += 1; //to check the second column
+        //check if the last column of Undestroyable tilemap is visible
+        Vector3 worldPosition = tileMapUndestroyable.CellToWorld(cellPosition);
+               
+        Vector3 viewportPosition = cam.WorldToViewportPoint(worldPosition);
+        
+        if (!(viewportPosition.x > 0 && viewportPosition.x < 1))
         {
             CreateNewLine();
-        } 
+            DeleteLine();
+        }
 
     }
-
     void CreateNewLine()
     {
         int lastColumn = tileMapDestroyable.cellBounds.xMax;
@@ -91,8 +103,15 @@ public class WalkerGenerator : MonoBehaviour
  
     }
     // Update is called once per frame
-    void Update()
-    {
-        
+    void DeleteLine(){
+        int firstColumn = tileMapUndestroyable.cellBounds.xMin;
+        for (int i = -7; i < 8; i++)
+        {
+            tileMapDestroyable.SetTile(new Vector3Int(firstColumn, i, 0), null);
+            tileMapUndestroyable.SetTile(new Vector3Int(firstColumn, i, 0), null);
+        }
+        //resize the tilemap
+        tileMapDestroyable.CompressBounds();
+        tileMapUndestroyable.CompressBounds();
     }
 }
