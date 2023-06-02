@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float speed = 0.2f;
+    public float speed = 0.0001f;
     public GameObject[] players;
     public GameObject[] Scene;
     public void Start()
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         Scene = GameObject.FindGameObjectsWithTag("Scene");
         foreach (GameObject Element in Scene)
         {
-            Element.transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed;
+            Element.transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed*0.01f;
         }
 
 

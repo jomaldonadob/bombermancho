@@ -43,21 +43,21 @@ public class BombController : MonoBehaviour
     {
         //instancio la bomba
         Vector2 position = transform.position;
+        //get the position of the neartest cell
+        Vector3Int cellPosition = destructibleTiles.WorldToCell(position);
+        Vector3 cellCenter = destructibleTiles.GetCellCenterWorld(cellPosition);
 
-        //redondeo la posicion de la bomba
-        position.x = Mathf.Round(position.x);
-        position.y = Mathf.Round(position.y);
 
-        //creo la bomba en la posicion redondeada
+
         //Quaternion.identity es la rotacion de la bomba
         GameObject bomb = Instantiate(bombPrefab, position, Quaternion.identity);
         bombsRemaining--; //resto una bomba
+        bomb.transform.position = cellCenter;
+        //move bomb to the center of the cell
 
         yield return new WaitForSeconds(bombFuseTime); //espero a que explote la bomba
 
         position = bomb.transform.position;
-        position.x = Mathf.Round(position.x); //redondeo la posicion de la explosición bomba
-        position.y = Mathf.Round(position.y); //redondeo la posicion de la explosición bomba
 
         Explosion explosion = Instantiate(explosionPrefab, position, Quaternion.identity); //instancio la explosion
         explosion.SetActiveRenderer(explosion.start); //activo el sprite de inicio de la explosion
