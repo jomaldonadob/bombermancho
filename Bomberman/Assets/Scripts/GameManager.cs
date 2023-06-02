@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         Scene = GameObject.FindGameObjectsWithTag("Scene");
         foreach (GameObject Element in Scene)
         {
-            Element.transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed*0.01f;
+            Element.transform.position += new Vector3(-1, 0, 0) * Time.deltaTime * speed*0.05f;
         }
 
 
