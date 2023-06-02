@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: 5c880c7a8d55539fd93b012d62d4ca17
+  - enabled: 1
     path: Assets/Scenes/Bomberman.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   m_configObjects: {}
