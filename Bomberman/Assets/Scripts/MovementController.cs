@@ -32,6 +32,12 @@ public class MovementController : MonoBehaviour
     //metodo que se ejecuta cada frame
     private void Update()
     {
+        //if player position in x less than -12.50f call death animation
+        if (transform.position.x < -12.50f)
+        {
+            DeathSequence();
+
+        }
         if (Input.GetKey(inputUp))
         {
             SetDirection(Vector2.up, spriteRendererUp);
