@@ -33,17 +33,27 @@ public class GameManager : MonoBehaviour
             {
                 aliveCount++;
             }
+
+            if (aliveCount <= 1){
+                if(player.activeSelf){
+                    Invoke(nameof(FirstScenario), 2f);
+                }else{
+                    Invoke(nameof(SecondScenario), 2f);   
+                }
+            
+            }
         }
 
-        if (aliveCount <= 1)
-        {
-            Invoke(nameof(NewRound), 3f);
-
-        }
+        
     }
 
-    private void NewRound()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void FirstScenario(){
+        SceneManager.LoadScene("player1_winning");
     }
+    private void SecondScenario(){
+        SceneManager.LoadScene("player2_winning");
+    }
+
 }
+
+
